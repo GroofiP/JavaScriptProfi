@@ -77,9 +77,7 @@ class GoodsList {
 
   sumAllProducts() {
     let all_sum = 0
-    console.log(true)
     this.goods.map(item => {
-      console.log(true)
       all_sum += new GoodsItem(item).sumProducts()
     });
     document.querySelector('.all-sum').innerHTML = all_sum
@@ -112,6 +110,18 @@ class Basket {
     })
   }
 
+  sumAllProducts() {
+    let all_sum = 0
+    this.goods.map(item => {
+      all_sum += new GoodsItem(item).sumProducts()
+    });
+
+    this.items.map(item => {
+      all_sum += +(new GoodsItem(item).sumProducts())
+    });
+    document.querySelector('.all-sum-basket').innerHTML = `Стоимость коризны: ${all_sum}`
+  }
+
   setGoods() {
     return service(URL, GOODS_BASKET).then((data) => {
       return reformDataBasket(data)
@@ -125,8 +135,12 @@ class Basket {
       let goodsList = this.goods.map(item => {
         return new ItemBasket(item).render()
       });
+      let el = this.items.map(item => {
+        return new ItemBasket(item).render()
+      })
       document.querySelector('.modal-body').innerHTML = goodsList.join(" ");
-
+      document.querySelector('.modal-body').innerHTML += el.join(" ")
+      this.sumAllProducts()
     })
     /*     let el = this.items.map(item => {
           return new ItemBasket(item).render()

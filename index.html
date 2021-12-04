@@ -11,48 +11,56 @@
 
 
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">EasyShop</a>
+    <div id="app">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">EasyShop</a>
+
+                    <div>
+                        <input type="text" v-model="searchLine">
+                        <button class="btn btn-secondary" id="searchLine" v-on:click="filter">Искать</button>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <main>
+            <div>
                 <p>Общая стоимость всех товаров: <span class="all-sum"></span></p>
-                <button type="button" onclick="basket.renderView()" class="btn btn-secondary" data-bs-toggle="modal"
+                <button type="button" v-on:click="showBasket" class="btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">
                     Просмотр коризны
                 </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-
-
-                            </div>
-                            <div class="all-sum-basket">
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                <button type="button" v-on:click="closeBasket" class="btn btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    Закрыть коризну
+                </button>
+                <div v-if="basketOn" class="basket-list row row-cols-1 row-cols-md-2 g-4">
+                    <div class="basket-item" v-for="item in basket">
+                        <h3>Название товара: {{item.title}}</h3>
+                        <h5>Цена: {{item.price}}</h5>
+                        <h5>Количество: {{item.quantity}}</h5>
                     </div>
                 </div>
             </div>
-        </nav>
-
-    </header>
-    <main>
-        <div class="goods-list row row-cols-1 row-cols-md-2 g-4"></div>
-    </main>
+            <article>
+                <div class="goods-list row row-cols-1 row-cols-md-2 g-4">
+                    <div class="good-item" v-for="item in filteredGoods">
+                        <h3>{{item.title}}</h3>
+                        <h5>{{item.price}}</h5>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis dignissimos, libero
+                            mollitia,
+                            expedita doloremque ullam accusantium alias recusandae quam odio nobis. Quis quo quidem in
+                            doloribus aut? Dolore, architecto repellendus!</p>
+                        <button v-on:click="addBasket(item)" class="btn btn-secondary">add</button>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 <script src="js/base.js"></script>
-<script src="js/bootstrap.js"></script>
 
 </html>

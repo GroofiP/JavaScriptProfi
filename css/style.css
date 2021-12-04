@@ -1,14 +1,19 @@
-header,
-main {
+header {
     padding-left: 50px;
     padding-right: 50px;
 }
 
 main {
+    padding-left: 100px;
+    padding-right: 100px;
     padding-top: 50px;
 }
 
 .all-sum-basket {
     font-weight: bold;
     text-align: center;
+}
+
+article {
+    padding-top: 80px;
 }

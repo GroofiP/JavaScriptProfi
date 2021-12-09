@@ -15,34 +15,35 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
+
                     <a class="navbar-brand" href="/">EasyShop</a>
 
-                    <div>
-                        <input type="text" v-model="searchLine">
-                        <button class="btn btn-secondary" id="searchLine" v-on:click="filter">Искать</button>
-                    </div>
+                    <search v-model="searchLine" @filter="filter">
+
+                    </search>
+
                 </div>
             </nav>
 
         </header>
         <main>
             <div>
+
                 <p>Общая стоимость всех товаров: <span class="all-sum"></span></p>
+
                 <button type="button" v-on:click="showBasket" class="btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">
                     Просмотр коризны
                 </button>
+
                 <button type="button" v-on:click="closeBasket" class="btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">
                     Закрыть коризну
                 </button>
-                <div v-if="basketOn" class="basket-list row row-cols-1 row-cols-md-2 g-4">
-                    <div class="basket-item" v-for="item in basket">
-                        <h3>Название товара: {{item.title}}</h3>
-                        <h5>Цена: {{item.price}}</h5>
-                        <h5>Количество: {{item.quantity}}</h5>
-                    </div>
-                </div>
+
+                <basket-list :basket_on="basket_on" :basket="basket">
+                </basket-list>
+
             </div>
             <article>
                 <div class="goods-list row row-cols-1 row-cols-md-2 g-4">

@@ -30,13 +30,45 @@ const service = function (url, goods) {
   });
 };
 
+Vue.component('search', {
+  props: ["searchLine", "filter"],
+  template: `
+  <div>
+    <input type="text" :searchLine="searchLine" v-on:input="$emit('input', $event.target.value)">
+    <button class="btn btn-secondary" id="searchLine" @click="$emit('filter')">Искать</button>
+  </div>
+  `,
+}, );
+
+Vue.component('basket-list', {
+  props: ["basket_on", "basket"],
+  template: `
+  <div v-if="basket_on" class="basket-list row row-cols-1 row-cols-md-2 g-4">
+    <div class="basket-item"  v-for="item in basket">
+      <basket-item :item="item"></basket-item>
+    </div>
+  </div>
+  `
+});
+
+Vue.component('basket-item', {
+  props: ["item"],
+  template: `
+  <div>
+    <h3>Название товара: {{item.title}}</h3>
+    <h5>Цена: {{item.price}}</h5>
+    <h5>Количество: {{item.quantity}}</h5>
+  </div>  
+    `
+});
+
 const app = new Vue({
   el: "#app",
   data: {
     goods: [],
     filteredGoods: [],
     searchLine: "",
-    basketOn: false,
+    basket_on: false,
     basket: [],
   },
 
@@ -84,11 +116,11 @@ const app = new Vue({
     },
 
     showBasket() {
-      return this.basketOn = true
+      return this.basket_on = true
     },
 
     closeBasket() {
-      this.basketOn = false
+      this.basket_on = false
     }
   },
 });

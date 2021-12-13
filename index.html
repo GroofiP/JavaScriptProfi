@@ -29,8 +29,6 @@
         <main>
             <div>
 
-                <p>Общая стоимость всех товаров: <span class="all-sum"></span></p>
-
                 <button type="button" v-on:click="showBasket" class="btn btn-secondary" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">
                     Просмотр коризны
@@ -41,22 +39,13 @@
                     Закрыть коризну
                 </button>
 
-                <basket-list :basket_on="basket_on" :basket="basket">
+                <basket-list :basket_on="basket_on">
                 </basket-list>
 
             </div>
             <article>
-                <div class="goods-list row row-cols-1 row-cols-md-2 g-4">
-                    <div class="good-item" v-for="item in filteredGoods">
-                        <h3>{{item.title}}</h3>
-                        <h5>{{item.price}}</h5>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis dignissimos, libero
-                            mollitia,
-                            expedita doloremque ullam accusantium alias recusandae quam odio nobis. Quis quo quidem in
-                            doloribus aut? Dolore, architecto repellendus!</p>
-                        <button v-on:click="addBasket(item)" class="btn btn-secondary">add</button>
-                    </div>
-                </div>
+                <good-items :filtered_goods="filtered_goods">
+                </good-items>
             </article>
         </main>
     </div>

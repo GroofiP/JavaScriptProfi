@@ -1,0 +1,25 @@
+{
+  "name": "javascriptprofi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GroofiP/JavaScriptProfi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GroofiP/JavaScriptProfi/issues"
+  },
+  "homepage": "https://github.com/GroofiP/JavaScriptProfi#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1"
+  }
+}

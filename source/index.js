@@ -1,8 +1,12 @@
-const URL = "http://localhost:8026/";
-const GOODS = "items.json";
+import {
+  URL,
+  GOODS
+} from "./constants"
 
+import "./components/search"
+import "./components/goods-item"
 
-const fetchAddGoods = (id) => {
+export const fetchAddGoods = (id) => {
   fetch(`${URL}${id}`, {
     method: "POST",
     headers: {
@@ -11,13 +15,13 @@ const fetchAddGoods = (id) => {
   })
 }
 
-const fetchDeleteGoods = (id) => {
+export const fetchDeleteGoods = (id) => {
   fetch(`${URL}${id}`, {
     method: "DELETE"
   })
 }
 
-const fetchViewBasket = (id) => {
+export const fetchViewBasket = (id) => {
   return fetch(`${URL}basket`).then((responce) => {
     return responce.json()
   }).then((data) => {
@@ -25,7 +29,7 @@ const fetchViewBasket = (id) => {
   })
 }
 
-const service = function (url, goods) {
+export const service = function (url, goods) {
   return new Promise((resolve, reject) => {
     fetch(`${url}${goods}`)
       .then((res) => {
@@ -37,15 +41,8 @@ const service = function (url, goods) {
   });
 };
 
-Vue.component('search', {
-  props: ["searchLine", "filter"],
-  template: `
-  <div>
-    <input type="text" :searchLine="searchLine" v-on:input="$emit('input', $event.target.value)">
-    <button class="btn btn-secondary" id="searchLine" @click="$emit('filter')">Искать</button>
-  </div>
-  `,
-}, );
+
+
 
 Vue.component('basket-list', {
   props: ["basket_on"],
@@ -86,16 +83,7 @@ Vue.component('basket-item', {
   },
 });
 
-Vue.component('good-items', {
-  props: ["filtered_goods"],
-  template: `
-  <div class="goods-list row row-cols-1 row-cols-md-2 g-4">
-    <div class="good-item" v-for="item in filtered_goods">
-        <good-item :item="item"></good-item>
-    </div>
-  </div>
-    `,
-});
+
 
 Vue.component('good-item', {
   props: ["item"],
